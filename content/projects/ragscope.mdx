@@ -1,0 +1,39 @@
+---
+title: "RAGscope"
+description: "A retrieval-augmented generation workbench for inspecting document chunks, prompts, and answer quality without treating the model as a black box."
+date: "2025-11-12"
+tags: ["rag", "typescript", "systems"]
+featured: true
+status: "shipped"
+repoUrl: "https://github.com"
+---
+
+## What it is
+
+RAGscope is a hands-on workbench for retrieval-augmented generation. Instead of shipping a chat box that pretends retrieval "just works," it surfaces the pipeline: ingestion, chunking, retrieval scores, and the final prompt assembly.
+
+## Why it exists
+
+Most demos stop at "look, it answered." The interesting engineering lives in the middle — what was retrieved, what was dropped, and how the answer would change if you tuned a single stage.
+
+## Architecture in one pass
+
+1. Documents land as static or uploaded source material.
+2. Chunks are stored with enough metadata to explain a hit later.
+3. Queries return ranked evidence with scores visible next to the answer.
+4. Operators can compare retrieval settings without rewriting the app.
+
+```ts
+// Pseudocode shape of a retrieval pass
+const hits = await index.search(query, { k: 8 });
+const context = hits.map((h) => h.chunk).join("\n---\n");
+const answer = await llm.complete({ system, context, query });
+```
+
+<Callout title="Design constraint" tone="tip">
+No secret intelligence pipeline required — the value is observability of the path, not wrapping a new model host.
+</Callout>
+
+## Takeaway
+
+If you cannot inspect the evidence, you cannot trust the answer. RAGscope is opinionated about making that evidence boringly visible.

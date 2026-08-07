@@ -1,0 +1,45 @@
+---
+title: "my-ui-library"
+description: "A small published React component library focused on domain-independent primitives — buttons, tabs, theme plumbing — without site personality leaking in."
+date: "2025-09-03"
+tags: ["react", "design-system", "npm"]
+featured: true
+status: "shipped"
+repoUrl: "https://github.com"
+---
+
+## What it is
+
+`my-ui-library` is a published package of generic UI primitives: the parts you would re-import across products without rewriting a button every time.
+
+## Boundaries
+
+The library only ships pieces that pass three tests:
+
+1. **Domain-independent** — no personal brand, jokes, or portfolio layout assumptions.
+2. **Actually reused** — proven in more than one consumer, not aspirational abstraction.
+3. **Worth the dependency weight** — not a one-off gimmick wrapped as a package.
+
+Site-specific work (heroes, project cards, MDX callouts with a personality) stays out on purpose.
+
+## What is in-bounds
+
+- Button patterns and focus behavior
+- Theme provider wiring for light/dark
+- Modal and tabs shells that stay visually neutral
+
+```tsx
+import { Button } from "@example/ui";
+
+export function SaveAction() {
+  return <Button type="button">Save</Button>;
+}
+```
+
+<Callout title="Portfolio note" tone="info">
+This site deliberately does **not** depend on the package. Primitives used here stay local so the portfolio can evolve without coupling to a release train.
+</Callout>
+
+## Takeaway
+
+A design system fails when it becomes a dumping ground for product chrome. Keeping the library small is the feature.
