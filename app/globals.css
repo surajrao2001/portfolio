@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --surface: 250 248 245;
+  --surface-raised: 255 255 255;
+  --ink: 22 24 28;
+  --ink-muted: 88 94 104;
+  --accent: 28 100 112;
+  --accent-soft: 220 236 238;
+  --font-sans: "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+}
+
+.dark {
+  --surface: 14 16 20;
+  --surface-raised: 24 28 34;
+  --ink: 238 240 243;
+  --ink-muted: 160 168 178;
+  --accent: 120 196 204;
+  --accent-soft: 28 48 52;
+}
+
+@layer base {
+  html {
+    @apply scroll-smooth antialiased;
+  }
+
+  body {
+    @apply min-h-screen bg-surface text-ink font-sans;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

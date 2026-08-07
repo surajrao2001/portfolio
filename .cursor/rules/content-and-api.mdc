@@ -1,0 +1,40 @@
+---
+description: MDX content, contact API, and testing conventions
+globs: "{content,lib,app/api,tests}/**/*.{ts,tsx,mdx,md}"
+alwaysApply: false
+---
+
+# Content, API & Tests
+
+## MDX content
+
+- Source of truth: `content/projects/*.mdx`, `content/blog/*.mdx`.
+- Loaders live in `lib/` (no Contentlayer if it fights the toolchain — prefer a typed MDX loader).
+- Frontmatter is validated (Zod or equivalent) before render — fail build on bad content.
+- No runtime CMS fetches.
+
+## Contact API (`POST /api/contact`)
+
+Pipeline order is fixed:
+1. Reject if honeypot filled.
+2. Validate body.
+3. Rate-limit (Upstash Redis, IP-based).
+4. Send via Resend.
+5. Return success/error JSON — no stack traces.
+
+## Env vars
+
+- Never commit secrets. Document every required key in `.env.example`.
+- Read env only in server code (`lib/` integrations, route handlers).
+
+## Tests (Vitest)
+
+- Unit-test pure `lib/` modules first (validation, rate-limit helpers, loaders).
+- RTL for interactive client components when behavior is non-trivial.
+- No network calls in unit tests — mock Resend/Upstash.
+
+## SEO (when implementing)
+
+- Every page: title template, description, canonical, OG/Twitter.
+- JSON-LD for Person and BlogPosting where specified.
+- `sitemap.ts` and `robots.ts` derived from content, not hand-maintained lists.
