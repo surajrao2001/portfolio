@@ -1,0 +1,52 @@
+import { Button } from "@/components/ui/Button";
+import { siteConfig } from "@/lib/site-config";
+import { cn } from "@/lib/cn";
+
+type HeroProps = {
+  className?: string;
+};
+
+export function Hero({ className }: HeroProps) {
+  return (
+    <section
+      aria-labelledby="hero-heading"
+      className={cn(
+        "relative isolate overflow-hidden border-b border-ink/10",
+        className,
+      )}
+    >
+      {/* Full-bleed atmospheric plane — celestial layer will own light/dark later */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10"
+      >
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_0%,rgb(var(--accent-soft))_0%,transparent_55%),radial-gradient(ellipse_at_90%_20%,rgb(var(--accent)/0.12)_0%,transparent_45%),linear-gradient(180deg,rgb(var(--surface))_0%,rgb(var(--surface-raised))_100%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-surface to-transparent" />
+      </div>
+
+      <div className="mx-auto flex min-h-[min(88vh,44rem)] max-w-5xl flex-col justify-center px-4 py-20 sm:px-6 sm:py-28">
+        <p className="font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
+          {siteConfig.name}
+        </p>
+        <h1
+          id="hero-heading"
+          className="mt-5 max-w-2xl font-display text-4xl font-semibold tracking-tight text-ink sm:text-5xl sm:leading-[1.1]"
+        >
+          Building products worth looking under the hood of.
+        </h1>
+        <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-muted">
+          Projects with real systems underneath, writing when something was
+          worth explaining, and a contact form that actually emails a person.
+        </p>
+        <div className="mt-10 flex flex-wrap gap-3">
+          <Button href="/projects" size="lg">
+            View projects
+          </Button>
+          <Button href="/contact" variant="secondary" size="lg">
+            Get in touch
+          </Button>
+        </div>
+      </div>
+    </section>
+  );
+}

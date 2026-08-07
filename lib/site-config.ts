@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Suraj Rao",
   title: "Suraj Rao — Portfolio",
   description:
-    "Personal portfolio of Suraj Rao — projects, writing, and a way to get in touch.",
+    "Projects with real systems underneath, writing when something was worth explaining, and a way to get in touch.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   author: {
     name: "Suraj Rao",
