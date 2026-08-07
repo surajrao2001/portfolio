@@ -15,13 +15,12 @@ export function Hero({ className }: HeroProps) {
         className,
       )}
     >
-      {/* Full-bleed atmospheric plane — celestial layer will own light/dark later */}
+      {/* Global CelestialBackground supplies the sky; keep only a soft content fade */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10"
       >
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_0%,rgb(var(--accent-soft))_0%,transparent_55%),radial-gradient(ellipse_at_90%_20%,rgb(var(--accent)/0.12)_0%,transparent_45%),linear-gradient(180deg,rgb(var(--surface))_0%,rgb(var(--surface-raised))_100%)]" />
-        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-surface to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-surface/80 to-transparent" />
       </div>
 
       <div className="mx-auto flex min-h-[min(88vh,44rem)] max-w-5xl flex-col justify-center px-4 py-20 sm:px-6 sm:py-28">

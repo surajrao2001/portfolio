@@ -11,6 +11,12 @@
   --accent-soft: 220 236 238;
   --font-sans: "Segoe UI", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  --celestial-sky-top: 232 242 245;
+  --celestial-sky-mid: 245 240 232;
+  --celestial-sky-bottom: 250 248 245;
+  --celestial-sun-core: 255 236 196;
+  --celestial-sun-glow: 255 210 140;
+  --celestial-cloud: 255 255 255;
 }
 
 .dark {
@@ -20,6 +26,11 @@
   --ink-muted: 160 168 178;
   --accent: 120 196 204;
   --accent-soft: 28 48 52;
+  --celestial-sky-top: 8 10 16;
+  --celestial-sky-mid: 12 16 24;
+  --celestial-sky-bottom: 14 16 20;
+  --celestial-moon-core: 232 236 242;
+  --celestial-moon-glow: 160 190 210;
 }
 
 @layer base {
@@ -47,5 +58,149 @@
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
+  }
+}
+
+/* Celestial sky — decorative only; content sits above via relative z stacking */
+@layer utilities {
+  .celestial-sky-light {
+    background:
+      radial-gradient(
+        ellipse 80% 55% at 18% 12%,
+        rgb(var(--accent-soft) / 0.85) 0%,
+        transparent 55%
+      ),
+      radial-gradient(
+        ellipse 50% 40% at 88% 18%,
+        rgb(var(--celestial-sun-glow) / 0.22) 0%,
+        transparent 50%
+      ),
+      linear-gradient(
+        180deg,
+        rgb(var(--celestial-sky-top)) 0%,
+        rgb(var(--celestial-sky-mid)) 48%,
+        rgb(var(--celestial-sky-bottom)) 100%
+      );
+  }
+
+  .celestial-sky-dark {
+    background:
+      radial-gradient(
+        ellipse 45% 35% at 82% 14%,
+        rgb(var(--celestial-moon-glow) / 0.18) 0%,
+        transparent 55%
+      ),
+      radial-gradient(
+        ellipse 70% 50% at 20% 80%,
+        rgb(var(--accent) / 0.08) 0%,
+        transparent 50%
+      ),
+      linear-gradient(
+        180deg,
+        rgb(var(--celestial-sky-top)) 0%,
+        rgb(var(--celestial-sky-mid)) 55%,
+        rgb(var(--celestial-sky-bottom)) 100%
+      );
+  }
+
+  .celestial-sun {
+    background: radial-gradient(
+      circle,
+      rgb(var(--celestial-sun-core)) 0%,
+      rgb(var(--celestial-sun-glow) / 0.55) 38%,
+      transparent 70%
+    );
+  }
+
+  .celestial-sun-pulse {
+    animation: celestial-sun-pulse 8s ease-in-out infinite;
+  }
+
+  .celestial-moon {
+    background: radial-gradient(
+      circle at 40% 40%,
+      rgb(var(--celestial-moon-core)) 0%,
+      rgb(var(--celestial-moon-glow) / 0.45) 42%,
+      transparent 72%
+    );
+    box-shadow: 0 0 60px rgb(var(--celestial-moon-glow) / 0.2);
+  }
+
+  .celestial-cloud {
+    background: radial-gradient(
+      ellipse at center,
+      rgb(var(--celestial-cloud) / 0.55) 0%,
+      rgb(var(--celestial-cloud) / 0.18) 55%,
+      transparent 70%
+    );
+    filter: blur(2px);
+  }
+
+  .celestial-cloud-a {
+    animation: celestial-cloud-drift 48s linear infinite;
+  }
+
+  .celestial-cloud-b {
+    animation: celestial-cloud-drift 62s linear infinite reverse;
+    animation-delay: -12s;
+  }
+
+  .celestial-cloud-c {
+    animation: celestial-cloud-drift 55s linear infinite;
+    animation-delay: -24s;
+  }
+
+  .celestial-star {
+    transform: translate(-50%, -50%);
+  }
+
+  .celestial-star-twinkle {
+    animation: celestial-star-twinkle 3.5s ease-in-out infinite;
+  }
+}
+
+@keyframes celestial-sun-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 1;
+  }
+}
+
+@keyframes celestial-cloud-drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(8%, -2%, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes celestial-star-twinkle {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.15);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .celestial-sun-pulse,
+  .celestial-cloud-a,
+  .celestial-cloud-b,
+  .celestial-cloud-c,
+  .celestial-star-twinkle {
+    animation: none !important;
   }
 }

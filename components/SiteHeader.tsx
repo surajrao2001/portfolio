@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { ThemeToggle } from "@/components/motion/ThemeToggle";
 import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/cn";
 
@@ -11,7 +12,7 @@ export function SiteHeader({ className }: SiteHeaderProps) {
   return (
     <header
       className={cn(
-        "border-b border-ink/10 bg-surface/90 backdrop-blur-sm",
+        "relative z-20 border-b border-ink/10 bg-surface/85 backdrop-blur-sm",
         className,
       )}
     >
@@ -22,20 +23,23 @@ export function SiteHeader({ className }: SiteHeaderProps) {
         >
           {siteConfig.name}
         </Link>
-        <nav aria-label="Primary">
-          <ul className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-ink-muted">
-            {siteConfig.nav.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className="transition-colors hover:text-ink"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <div className="flex items-center gap-3 sm:gap-4">
+          <nav aria-label="Primary">
+            <ul className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-ink-muted">
+              {siteConfig.nav.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="transition-colors hover:text-ink"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   );
