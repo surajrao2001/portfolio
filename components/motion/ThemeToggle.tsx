@@ -1,9 +1,14 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
+import { flushSync } from "react-dom";
 
 import { cn } from "@/lib/cn";
+import {
+  getToggleCenter,
+  runThemeTransition,
+} from "@/lib/theme-transition";
 
 type ThemeToggleProps = {
   className?: string;
@@ -20,11 +25,27 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
   const isDark = mounted && resolvedTheme === "dark";
   const label = isDark ? "Switch to light mode" : "Switch to dark mode";
 
+  function handleToggle(event: MouseEvent<HTMLButtonElement>) {
+    const { x, y } = getToggleCenter(event.currentTarget.getBoundingClientRect());
+    const nextTheme = isDark ? "light" : "dark";
+
+    runThemeTransition({
+      x,
+      y,
+      update: () => {
+        // Flush so the class swap lands inside the View Transition callback.
+        flushSync(() => {
+          setTheme(nextTheme);
+        });
+      },
+    });
+  }
+
   return (
     <button
       type="button"
       aria-label={label}
-      onClick={() => setTheme(isDark ? "light" : "dark")}
+      onClick={handleToggle}
       className={cn(
         "inline-flex h-9 w-9 items-center justify-center rounded-md border border-ink/15 bg-surface-raised/80 text-ink shadow-sm transition-colors",
         "hover:border-accent/40 hover:bg-accent-soft/60 hover:text-accent",

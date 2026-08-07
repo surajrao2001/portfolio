@@ -204,3 +204,37 @@
     animation: none !important;
   }
 }
+
+/* Theme wipe via View Transitions — origin set by ThemeToggle (viewport px).
+   Scoped to VT pseudo-elements so base-layer reduced-motion * rules do not
+   need to target these; JS also skips startViewTransition when motion is reduced. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 2;
+  animation: theme-circle-reveal 0.5s ease-in-out both;
+}
+
+@keyframes theme-circle-reveal {
+  from {
+    clip-path: circle(0% at var(--theme-toggle-x, 50%) var(--theme-toggle-y, 50%));
+  }
+  to {
+    clip-path: circle(150% at var(--theme-toggle-x, 50%) var(--theme-toggle-y, 50%));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+}
