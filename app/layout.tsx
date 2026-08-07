@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { DM_Sans, Space_Grotesk } from "next/font/google";
 
+import { CelestialBackgroundLazy } from "@/components/motion/CelestialBackgroundLazy";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import { siteConfig } from "@/lib/site-config";
 
 import "./globals.css";
@@ -54,12 +56,17 @@ type RootLayoutProps = {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" className={`${sans.variable} ${display.variable}`} suppressHydrationWarning>
-      <body className="flex min-h-screen flex-col">
-        <SiteHeader />
-        <main id="main" className="flex-1">
-          {children}
-        </main>
-        <SiteFooter />
+      <body className="relative min-h-screen bg-surface text-ink">
+        <ThemeProvider>
+          <CelestialBackgroundLazy />
+          <div className="relative z-10 flex min-h-screen flex-col">
+            <SiteHeader />
+            <main id="main" className="flex-1">
+              {children}
+            </main>
+            <SiteFooter />
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );
