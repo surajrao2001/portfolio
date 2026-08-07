@@ -1,54 +1,42 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 
+import { ProjectCard } from "@/components/ProjectCard";
 import { getAllProjects } from "@/lib/content/projects";
 
 export const metadata: Metadata = {
   title: "Projects",
-  description: "Selected projects and case write-ups.",
+  description:
+    "What I built, why the trade-offs, and what I'd do differently — case write-ups from MDX in the repo.",
 };
 
 export default function ProjectsPage() {
   const projects = getAllProjects();
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
-      <h1 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">
-        Projects
-      </h1>
-      <p className="mt-4 max-w-2xl text-lg text-ink-muted">
-        Case write-ups loaded from MDX in the repo — no CMS in the middle.
-      </p>
+    <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20">
+      <header className="max-w-2xl">
+        <p className="text-sm font-medium tracking-wide text-accent">
+          Case write-ups
+        </p>
+        <h1 className="mt-3 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
+          Projects
+        </h1>
+        <p className="mt-4 text-lg leading-relaxed text-ink-muted">
+          What I built, why the trade-offs, what I&apos;d do differently next
+          time — not a feature dump. Loaded from MDX in the repo; Git is the
+          CMS.
+        </p>
+      </header>
+
       {projects.length === 0 ? (
-        <p className="mt-10 text-ink-muted">No projects published yet.</p>
+        <p className="mt-12 rounded-lg border border-dashed border-ink/15 bg-surface-raised/40 px-5 py-10 text-ink-muted">
+          No projects published yet. Check back after the next commit lands.
+        </p>
       ) : (
-        <ul className="mt-10 divide-y divide-ink/10 border-t border-ink/10">
+        <ul className="mt-12 flex flex-col gap-4">
           {projects.map((project) => (
-            <li key={project.slug} className="py-6">
-              <Link
-                href={`/projects/${project.slug}`}
-                className="group block focus-visible:outline-offset-4"
-              >
-                <div className="flex flex-wrap items-baseline justify-between gap-2">
-                  <h2 className="font-display text-xl font-semibold tracking-tight group-hover:text-accent">
-                    {project.frontmatter.title}
-                  </h2>
-                  <time
-                    dateTime={project.frontmatter.date}
-                    className="text-sm text-ink-muted"
-                  >
-                    {project.frontmatter.date}
-                  </time>
-                </div>
-                <p className="mt-2 max-w-2xl text-ink-muted">
-                  {project.frontmatter.description}
-                </p>
-                {project.frontmatter.tags.length > 0 ? (
-                  <p className="mt-3 text-sm text-ink-muted">
-                    {project.frontmatter.tags.join(" · ")}
-                  </p>
-                ) : null}
-              </Link>
+            <li key={project.slug}>
+              <ProjectCard project={project} />
             </li>
           ))}
         </ul>

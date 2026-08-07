@@ -1,5 +1,4 @@
-import Link from "next/link";
-
+import { ProjectCard } from "@/components/ProjectCard";
 import { Button } from "@/components/ui/Button";
 import type { ProjectDocument } from "@/lib/content/projects";
 import { cn } from "@/lib/cn";
@@ -9,7 +8,7 @@ type FeaturedProjectsProps = {
   className?: string;
 };
 
-/** Home featured strip — list presentation only; ProjectCard lives in a later milestone. */
+/** Home featured strip — reuses ProjectCard (compact) for consistency with /projects. */
 export function FeaturedProjects({
   projects,
   className,
@@ -35,30 +34,19 @@ export function FeaturedProjects({
             >
               Featured projects
             </h2>
+            <p className="mt-3 max-w-xl text-ink-muted">
+              Trade-offs and constraints first — the interesting engineering is
+              usually in the middle.
+            </p>
           </div>
           <Button href="/projects" variant="ghost">
             All projects
           </Button>
         </div>
-        <ul className="mt-10 divide-y divide-ink/10 border-y border-ink/10">
+        <ul className="mt-10 flex flex-col gap-3">
           {projects.map((project) => (
             <li key={project.slug}>
-              <Link
-                href={`/projects/${project.slug}`}
-                className="group flex flex-col gap-2 py-6 transition-colors focus-visible:outline-offset-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8"
-              >
-                <div>
-                  <h3 className="font-display text-xl font-semibold tracking-tight text-ink group-hover:text-accent">
-                    {project.frontmatter.title}
-                  </h3>
-                  <p className="mt-2 max-w-2xl text-ink-muted">
-                    {project.frontmatter.description}
-                  </p>
-                </div>
-                <p className="shrink-0 text-sm text-ink-muted">
-                  {project.frontmatter.tags.slice(0, 3).join(" · ")}
-                </p>
-              </Link>
+              <ProjectCard project={project} variant="compact" />
             </li>
           ))}
         </ul>

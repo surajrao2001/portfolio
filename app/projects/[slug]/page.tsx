@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { projectStatusLabel } from "@/components/ProjectCard";
 import { MdxContent } from "@/components/mdx/MdxContent";
 import {
   getProjectBySlug,
   getProjectSlugs,
 } from "@/lib/content/projects";
+import { cn } from "@/lib/cn";
 
 type ProjectPageProps = {
   params: { slug: string };
@@ -39,30 +41,53 @@ export default function ProjectPage({ params }: ProjectPageProps) {
   return (
     <article className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
       <p className="text-sm text-ink-muted">
-        <Link href="/projects" className="hover:text-ink">
+        <Link
+          href="/projects"
+          className="font-medium text-accent underline-offset-4 hover:underline focus-visible:outline-offset-4"
+        >
           Projects
         </Link>
         <span aria-hidden="true"> / </span>
         <span>{frontmatter.title}</span>
       </p>
       <header className="mt-4 border-b border-ink/10 pb-8">
-        <h1 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">
-          {frontmatter.title}
-        </h1>
-        <p className="mt-4 text-lg text-ink-muted">{frontmatter.description}</p>
-        <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm text-ink-muted">
-          <time dateTime={frontmatter.date}>{frontmatter.date}</time>
-          <span className="capitalize">{frontmatter.status}</span>
-          {frontmatter.tags.length > 0 ? (
-            <span>{frontmatter.tags.join(" · ")}</span>
+        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+          <h1 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">
+            {frontmatter.title}
+          </h1>
+          {frontmatter.featured ? (
+            <span className="text-xs font-medium tracking-wide text-accent">
+              Featured
+            </span>
           ) : null}
         </div>
+        <p className="mt-4 text-lg leading-relaxed text-ink-muted">
+          {frontmatter.description}
+        </p>
+        <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-ink-muted">
+          <time dateTime={frontmatter.date}>{frontmatter.date}</time>
+          <span
+            className={cn(
+              "inline-flex items-center rounded-md px-2 py-0.5 text-xs font-medium",
+              frontmatter.status === "wip" && "bg-accent-soft text-accent",
+              frontmatter.status === "shipped" && "bg-ink/5 text-ink-muted",
+              frontmatter.status === "archived" && "bg-ink/5 text-ink-muted",
+            )}
+          >
+            {projectStatusLabel(frontmatter.status)}
+          </span>
+        </div>
+        {frontmatter.tags.length > 0 ? (
+          <p className="mt-4 text-sm text-ink-muted">
+            {frontmatter.tags.join(" · ")}
+          </p>
+        ) : null}
         {(frontmatter.demoUrl || frontmatter.repoUrl) && (
-          <div className="mt-5 flex flex-wrap gap-4 text-sm">
+          <div className="mt-6 flex flex-wrap gap-4 text-sm">
             {frontmatter.demoUrl ? (
               <a
                 href={frontmatter.demoUrl}
-                className="font-medium text-accent underline-offset-4 hover:underline"
+                className="font-medium text-accent underline-offset-4 hover:underline focus-visible:outline-offset-4"
                 rel="noopener noreferrer"
                 target="_blank"
               >
@@ -72,7 +97,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
             {frontmatter.repoUrl ? (
               <a
                 href={frontmatter.repoUrl}
-                className="font-medium text-accent underline-offset-4 hover:underline"
+                className="font-medium text-accent underline-offset-4 hover:underline focus-visible:outline-offset-4"
                 rel="noopener noreferrer"
                 target="_blank"
               >
