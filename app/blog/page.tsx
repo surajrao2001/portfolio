@@ -1,49 +1,41 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 
+import { BlogCard } from "@/components/BlogCard";
 import { getAllPosts } from "@/lib/content/blog";
 
 export const metadata: Metadata = {
   title: "Blog",
-  description: "Notes on building products and shipping carefully.",
+  description:
+    "Notes that ship with the repo — write, commit, deploy. Git is the CMS.",
 };
 
 export default function BlogPage() {
   const posts = getAllPosts();
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
-      <h1 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">
-        Blog
-      </h1>
-      <p className="mt-4 max-w-2xl text-lg text-ink-muted">
-        Posts ship as Markdown/MDX in git — write, commit, deploy.
-      </p>
+    <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20">
+      <header className="max-w-2xl">
+        <p className="text-sm font-medium tracking-wide text-accent">
+          Writing
+        </p>
+        <h1 className="mt-3 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
+          Blog
+        </h1>
+        <p className="mt-4 text-lg leading-relaxed text-ink-muted">
+          Posts ship as MDX in the repo — write, commit, deploy. No CMS
+          dashboard; Git is the publish button.
+        </p>
+      </header>
+
       {posts.length === 0 ? (
-        <p className="mt-10 text-ink-muted">No posts published yet.</p>
+        <p className="mt-12 rounded-lg border border-dashed border-ink/15 bg-surface-raised/40 px-5 py-10 text-ink-muted">
+          No posts published yet. Next note lands with the next commit.
+        </p>
       ) : (
-        <ul className="mt-10 divide-y divide-ink/10 border-t border-ink/10">
+        <ul className="mt-12 flex flex-col gap-4">
           {posts.map((post) => (
-            <li key={post.slug} className="py-6">
-              <Link
-                href={`/blog/${post.slug}`}
-                className="group block focus-visible:outline-offset-4"
-              >
-                <div className="flex flex-wrap items-baseline justify-between gap-2">
-                  <h2 className="font-display text-xl font-semibold tracking-tight group-hover:text-accent">
-                    {post.frontmatter.title}
-                  </h2>
-                  <time
-                    dateTime={post.frontmatter.date}
-                    className="text-sm text-ink-muted"
-                  >
-                    {post.frontmatter.date}
-                  </time>
-                </div>
-                <p className="mt-2 text-ink-muted">
-                  {post.frontmatter.description}
-                </p>
-              </Link>
+            <li key={post.slug}>
+              <BlogCard post={post} />
             </li>
           ))}
         </ul>

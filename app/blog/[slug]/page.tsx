@@ -37,7 +37,10 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
   return (
     <article className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
       <p className="text-sm text-ink-muted">
-        <Link href="/blog" className="hover:text-ink">
+        <Link
+          href="/blog"
+          className="font-medium text-accent underline-offset-4 hover:underline focus-visible:outline-offset-4"
+        >
           Blog
         </Link>
         <span aria-hidden="true"> / </span>
@@ -47,14 +50,18 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
         <h1 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">
           {frontmatter.title}
         </h1>
-        <p className="mt-4 text-lg text-ink-muted">{frontmatter.description}</p>
-        <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm text-ink-muted">
+        <p className="mt-4 text-lg leading-relaxed text-ink-muted">
+          {frontmatter.description}
+        </p>
+        <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-ink-muted">
           <time dateTime={frontmatter.date}>{frontmatter.date}</time>
           <span>{siteConfig.author.name}</span>
-          {frontmatter.tags.length > 0 ? (
-            <span>{frontmatter.tags.join(" · ")}</span>
-          ) : null}
         </div>
+        {frontmatter.tags.length > 0 ? (
+          <p className="mt-4 text-sm text-ink-muted">
+            {frontmatter.tags.join(" · ")}
+          </p>
+        ) : null}
       </header>
       <div className="pt-2">
         <MdxContent source={body} />
