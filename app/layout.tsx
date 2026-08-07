@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { DM_Sans, Space_Grotesk } from "next/font/google";
 
 import { CelestialBackgroundLazy } from "@/components/motion/CelestialBackgroundLazy";
+import { CustomCursorLazy } from "@/components/motion/CustomCursorLazy";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { ThemeProvider } from "@/components/ThemeProvider";
@@ -59,6 +60,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body className="relative min-h-screen bg-surface text-ink">
         <ThemeProvider>
           <CelestialBackgroundLazy />
+          <CustomCursorLazy />
           <div className="relative z-10 flex min-h-screen flex-col">
             <SiteHeader />
             <main id="main" className="flex-1">

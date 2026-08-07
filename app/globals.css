@@ -238,3 +238,9 @@
     animation: none !important;
   }
 }
+
+/* Custom cursor — body class only when fine pointer + motion allowed (JS-gated). */
+body.custom-cursor-active,
+body.custom-cursor-active * {
+  cursor: none !important;
+}
