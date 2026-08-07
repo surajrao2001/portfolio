@@ -8,7 +8,10 @@ type ThemeProviderProps = {
 
 /**
  * Client wrapper for next-themes: class-based light/dark, system preference,
- * and localStorage persistence. View Transitions circle wipe is a later feature.
+ * and localStorage persistence.
+ *
+ * Keep `disableTransitionOnChange` so CSS color transitions do not fight the
+ * circle wipe. The wipe is owned by ThemeToggle + `lib/theme-transition`.
  */
 export function ThemeProvider({ children }: ThemeProviderProps) {
   return (
