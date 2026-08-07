@@ -1,0 +1,41 @@
+---
+description: Component structure, Tailwind, and motion conventions
+globs: "{app,components}/**/*.{ts,tsx,css}"
+alwaysApply: false
+---
+
+# Components, Tailwind & Motion
+
+## Structure
+
+- `components/` — site personality and layout (Hero, cards, header/footer).
+- `components/ui/` — small domain-independent primitives used across pages (Button, etc.).
+- `components/mdx/` — MDX-only renderers.
+- `components/motion/` — cursor, celestial background, theme toggle, motion utilities.
+- One component per file; file name matches the export (`ProjectCard.tsx` → `ProjectCard`).
+
+## Tailwind
+
+- Utility-first; extract repeated class strings with `cn()` (`clsx` + `tailwind-merge`) in `lib/cn.ts`.
+- Design tokens via CSS variables in `app/globals.css` + Tailwind theme extension — not hard-coded ad-hoc hex scattered in JSX.
+- No inline `style=` except for true dynamic values (e.g. motion transforms, clip-path origin).
+- Mobile-first responsive utilities (`sm:`, `md:`, `lg:`).
+
+## Accessibility
+
+- Semantic landmarks: `header`, `nav`, `main`, `footer`.
+- Interactive elements are real buttons/links — not clickable `div`s.
+- Visible focus rings; do not remove outline without a replacement.
+- Images require meaningful `alt` (or empty alt when decorative).
+
+## Motion (Framer Motion)
+
+- Only library: Framer Motion (no GSAP, no extra cursor packages).
+- Gate desktop-only effects with `(pointer: fine)`.
+- Honor `prefers-reduced-motion`: skip or instant-apply transitions.
+- Prefer `transform` and `opacity`; avoid animating layout-triggering properties.
+
+## Forms
+
+- Every control needs a label (visible or `aria-label`).
+- Client validation is UX only; server validation is authoritative.

@@ -1,0 +1,33 @@
+---
+description: TypeScript and Next.js App Router coding standards
+globs: "{app,components,lib,tests}/**/*.{ts,tsx}"
+alwaysApply: false
+---
+
+# TypeScript & Next.js Standards
+
+## TypeScript
+
+- `strict` remains on. No `any` unless justified with a one-line comment.
+- Prefer `type` for props/unions; `interface` only when extension is intentional.
+- Export named functions/components; default exports only for Next.js `page.tsx` / `layout.tsx` / `error.tsx` / `not-found.tsx` / `loading.tsx` / route handlers if convention requires.
+- Colocate types with the module that owns them; share via `lib/` only when reused by two+ modules.
+
+## Next.js App Router
+
+- Default to Server Components. Add `"use client"` at the top boundary only.
+- Fetch and transform data in Server Components or `lib/` loaders — never `useEffect` for static MDX.
+- Use the Metadata API (`generateMetadata` / `metadata`) on every route that ships.
+- Dynamic routes need `generateStaticParams()` for MDX-backed pages.
+- Route handlers live under `app/api/**/route.ts`; only contact (+ OG) are expected.
+
+## Imports & modules
+
+- Path alias: `@/*` → project root.
+- Prefer absolute imports for cross-folder references; relative only within a tight folder.
+- Keep side-effect-free modules in `lib/` pure and unit-testable.
+
+## Error handling
+
+- User-facing UI never dumps stack traces.
+- API routes: validate input, return typed JSON + correct status codes, never leak secrets.

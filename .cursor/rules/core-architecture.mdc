@@ -1,0 +1,46 @@
+---
+description: Portfolio core architecture, stack boundaries, and git workflow
+alwaysApply: true
+---
+
+# Portfolio — Core Architecture
+
+Before any change: re-read this file and the glob-scoped rule that matches the files you touch.
+
+## Architecture (non-negotiable)
+
+- **Stack:** Next.js 14 App Router, TypeScript strict, Tailwind CSS, Framer Motion, next-themes.
+- **Pattern:** Jamstack — static MDX content at build time; **one** dynamic path: `POST /api/contact`.
+- **No:** database, auth, CMS, Docker, AI/LLM, queues, second animation library (no GSAP), external UI package (`@surajrao/my-ui-library` is out of scope — build primitives locally).
+- **Layout:** `app/`, `components/`, `components/mdx/`, `components/motion/`, `lib/`, `content/`, `tests/`.
+- **Rendering:** Server Components by default. `"use client"` only for interactivity, motion, theme toggle, or browser APIs.
+- **UI:** Site-owned components only (`Button`, theme provider, cards, Hero, MDX renderers). Keep domain-independent primitives small and local under `components/ui/` when needed.
+
+## Git workflow
+
+1. Branch from up-to-date `develop`: `feature/<name>` or `chore/<name>`.
+2. Conventional Commits only (`feat:`, `fix:`, `chore:`, `docs:`, `test:`, `ci:`).
+3. Finish feature → **commit on branch → stop**. Human merges to `develop`. Do not merge unless asked.
+4. Never commit `Portfolio_Site_Blueprint.md`, `TRACKER.md`, `.env*`, or secrets.
+5. After each milestone: update local `TRACKER.md` (gitignored).
+
+## Clean architecture principles
+
+- **Dependencies point inward:** pages orchestrate; components present; `lib/` holds pure loaders, validation, and integrations.
+- **Single responsibility** per module/file; meaningful names (`rate-limit.ts`, not `utils2.ts`).
+- **No placeholders:** real implementations or don't ship the file. Ask if blocked on missing secrets/copy.
+- **Scope discipline:** change only what the feature requires; no drive-by refactors.
+- **Comments:** only when intent or constraint is non-obvious.
+
+## Performance & a11y baseline
+
+- Lazy-mount heavy client UI (`next/dynamic`, `{ ssr: false }` where needed): custom cursor, celestial background.
+- Respect `prefers-reduced-motion` everywhere animation exists.
+- Semantic HTML landmarks; heading hierarchy; labels on form controls.
+- Prefer transform/opacity for animation (compositor-friendly).
+
+## Orchestration
+
+- Parallelize features only when file sets do not overlap.
+- Prefer small focused agents over one mega-change to save context.
+- Prefer tools over long chat; implement, then brief milestone summary.
