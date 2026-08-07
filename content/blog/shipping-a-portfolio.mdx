@@ -1,0 +1,36 @@
+---
+title: "Shipping a portfolio that is allowed to be simple"
+description: "Why this site is deliberately Jamstack with one API route — and how that choice is an engineering signal, not a lack of ambition."
+date: "2026-01-18"
+tags: ["engineering", "nextjs", "portfolio"]
+published: true
+---
+
+## The temptation to overbuild
+
+It is easy to decorate a personal site with auth, a CMS, a queue, and a dashboard nobody will open twice. That stack is impressive on a whiteboard and dead weight in production.
+
+## What this site actually needs
+
+- Real project write-ups and posts that ship with the repo
+- Fast pages that index cleanly
+- One honest dynamic path: the contact form
+
+Everything else is presentation and judgment — motion systems, voice, and SEO that do not require a backend service mesh.
+
+## A rule that keeps the codebase readable
+
+If a feature cannot name a user-visible reason for existing, it does not ship. That is why content is MDX on disk: Git is the CMS, review is the publish button.
+
+```md
+---
+title: Example post
+date: 2026-01-18
+---
+
+Write it. Commit it. Deploy it.
+```
+
+<Callout title="Working rule" tone="tip">
+Specific and self-aware beats generic and try-hard — in architecture as much as in copy.
+</Callout>
