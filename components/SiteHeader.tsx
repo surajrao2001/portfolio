@@ -12,7 +12,7 @@ export function SiteHeader({ className }: SiteHeaderProps) {
   return (
     <header
       className={cn(
-        "relative z-20 border-b border-ink/10 bg-surface/85 backdrop-blur-sm",
+        "sticky top-0 z-40 bg-surface/80 backdrop-blur-md supports-[backdrop-filter]:bg-surface/70",
         className,
       )}
     >
@@ -30,7 +30,7 @@ export function SiteHeader({ className }: SiteHeaderProps) {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="transition-colors hover:text-ink"
+                    className="transition-colors hover:text-accent"
                   >
                     {item.label}
                   </Link>

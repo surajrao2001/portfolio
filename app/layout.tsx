@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 
-import { CelestialBackgroundLazy } from "@/components/motion/CelestialBackgroundLazy";
-import { CustomCursorLazy } from "@/components/motion/CustomCursorLazy";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { ThemeProvider } from "@/components/ThemeProvider";
@@ -75,11 +73,9 @@ type RootLayoutProps = {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" className={`${sans.variable} ${display.variable}`} suppressHydrationWarning>
-      <body className="relative min-h-screen bg-surface text-ink">
+      <body className="min-h-screen text-ink">
         <ThemeProvider>
-          <CelestialBackgroundLazy />
-          <CustomCursorLazy />
-          <div className="relative z-10 flex min-h-screen flex-col">
+          <div className="flex min-h-screen flex-col">
             <SiteHeader />
             <main id="main" className="flex-1">
               {children}

@@ -47,8 +47,8 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
       aria-label={label}
       onClick={handleToggle}
       className={cn(
-        "inline-flex h-9 w-9 items-center justify-center rounded-md border border-ink/15 bg-surface-raised/80 text-ink shadow-sm transition-colors",
-        "hover:border-accent/40 hover:bg-accent-soft/60 hover:text-accent",
+        "inline-flex h-9 w-9 items-center justify-center rounded-md bg-surface-raised/90 text-ink shadow-sm ring-1 ring-ink/10 transition-colors",
+        "hover:bg-accent-soft/50 hover:text-accent hover:ring-accent/30",
         "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
         className,
       )}

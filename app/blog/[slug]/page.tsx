@@ -46,7 +46,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
         <span aria-hidden="true"> / </span>
         <span>{frontmatter.title}</span>
       </p>
-      <header className="mt-4 border-b border-ink/10 pb-8">
+      <header className="mt-4 pb-8">
         <h1 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">
           {frontmatter.title}
         </h1>

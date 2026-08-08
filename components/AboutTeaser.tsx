@@ -10,7 +10,7 @@ export function AboutTeaser({ className }: AboutTeaserProps) {
   return (
     <section
       aria-labelledby="about-teaser-heading"
-      className={cn("border-b border-ink/10", className)}
+      className={cn(className)}
     >
       <Reveal>
         <div className="mx-auto grid max-w-5xl gap-8 px-4 py-16 sm:px-6 sm:py-20 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:items-end md:gap-12">
@@ -26,7 +26,7 @@ export function AboutTeaser({ className }: AboutTeaserProps) {
             </h2>
           </div>
           <div>
-            <p className="text-lg leading-relaxed text-ink-muted">
+            <p className="mt-0 text-lg leading-relaxed text-ink-muted">
               I care more about the boring middle of a feature than the demo
               GIF. The middle is where judgment shows up — constraints,
               trade-offs, and the parts that still work six months later.

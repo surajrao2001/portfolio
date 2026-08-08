@@ -77,8 +77,8 @@ export function ProjectCard(props: ProjectCardProps) {
       <Link
         href={`/projects/${slug}`}
         className={cn(
-          "group block rounded-lg border border-ink/10 bg-surface-raised/60 transition-[border-color,background-color] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
-          "hover:border-accent/35 hover:bg-surface-raised",
+          "group block rounded-lg bg-surface-raised/70 shadow-sm ring-1 ring-ink/5 transition-[background-color,box-shadow,ring-color] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
+          "hover:bg-surface-raised hover:ring-accent/25 hover:shadow-md",
           isCompact ? "px-4 py-5 sm:px-5" : "px-4 py-6 sm:px-6",
         )}
       >
