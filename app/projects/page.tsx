@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { Reveal } from "@/components/motion/Reveal";
 import { ProjectCard } from "@/components/ProjectCard";
 import { getAllProjects } from "@/lib/content/projects";
 
@@ -14,7 +15,7 @@ export default function ProjectsPage() {
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20">
-      <header className="max-w-2xl">
+      <Reveal as="header" className="max-w-2xl">
         <p className="text-sm font-medium tracking-wide text-accent">
           Case write-ups
         </p>
@@ -26,7 +27,7 @@ export default function ProjectsPage() {
           time — not a feature dump. Loaded from MDX in the repo; Git is the
           CMS.
         </p>
-      </header>
+      </Reveal>
 
       {projects.length === 0 ? (
         <p className="mt-12 rounded-lg border border-dashed border-ink/15 bg-surface-raised/40 px-5 py-10 text-ink-muted">

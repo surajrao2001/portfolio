@@ -1,3 +1,4 @@
+import { Magnetic } from "@/components/motion/Magnetic";
 import { Button } from "@/components/ui/Button";
 import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/cn";
@@ -38,9 +39,11 @@ export function Hero({ className }: HeroProps) {
           worth explaining, and a contact form that actually emails a person.
         </p>
         <div className="mt-10 flex flex-wrap gap-3">
-          <Button href="/projects" size="lg">
-            View projects
-          </Button>
+          <Magnetic>
+            <Button href="/projects" size="lg">
+              View projects
+            </Button>
+          </Magnetic>
           <Button href="/contact" variant="secondary" size="lg">
             Get in touch
           </Button>

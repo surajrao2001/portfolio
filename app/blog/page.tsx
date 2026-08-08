@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { BlogCard } from "@/components/BlogCard";
+import { Reveal } from "@/components/motion/Reveal";
 import { getAllPosts } from "@/lib/content/blog";
 
 export const metadata: Metadata = {
@@ -14,7 +15,7 @@ export default function BlogPage() {
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20">
-      <header className="max-w-2xl">
+      <Reveal as="header" className="max-w-2xl">
         <p className="text-sm font-medium tracking-wide text-accent">
           Writing
         </p>
@@ -25,7 +26,7 @@ export default function BlogPage() {
           Posts ship as MDX in the repo — write, commit, deploy. No CMS
           dashboard; Git is the publish button.
         </p>
-      </header>
+      </Reveal>
 
       {posts.length === 0 ? (
         <p className="mt-12 rounded-lg border border-dashed border-ink/15 bg-surface-raised/40 px-5 py-10 text-ink-muted">
