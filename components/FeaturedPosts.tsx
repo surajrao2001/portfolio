@@ -1,27 +1,23 @@
 import { Reveal } from "@/components/motion/Reveal";
-import { ProjectCard } from "@/components/ProjectCard";
+import { BlogCard } from "@/components/BlogCard";
 import { Button } from "@/components/ui/Button";
-import type { ProjectDocument } from "@/lib/content/projects";
+import type { BlogDocument } from "@/lib/content/blog";
 import { cn } from "@/lib/cn";
 
-type FeaturedProjectsProps = {
-  projects: ProjectDocument[];
+type FeaturedPostsProps = {
+  posts: BlogDocument[];
   className?: string;
 };
 
-/** Home featured strip — reuses ProjectCard (compact) for consistency with /projects. */
-export function FeaturedProjects({
-  projects,
-  className,
-}: FeaturedProjectsProps) {
-  if (projects.length === 0) {
+/** Home “sometimes I write” strip — reuses BlogCard for list consistency. */
+export function FeaturedPosts({ posts, className }: FeaturedPostsProps) {
+  if (posts.length === 0) {
     return null;
   }
 
   return (
     <section
-      id="work"
-      aria-labelledby="featured-projects-heading"
+      aria-labelledby="featured-posts-heading"
       className={cn(className)}
     >
       <Reveal>
@@ -29,27 +25,26 @@ export function FeaturedProjects({
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="text-sm font-medium tracking-wide text-accent">
-                Featured work
+                Sometimes I write
               </p>
               <h2
-                id="featured-projects-heading"
+                id="featured-posts-heading"
                 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl"
               >
-                Projects
+                Blog
               </h2>
               <p className="mt-3 max-w-xl text-ink-muted">
-                What I built, why the trade-offs, what I would change next —
-                not a feature dump.
+                Notes ship with the repo — write, commit, deploy. No CMS theatre.
               </p>
             </div>
-            <Button href="/projects" variant="ghost">
-              View all projects
+            <Button href="/blog" variant="ghost">
+              All posts
             </Button>
           </div>
           <ul className="mt-10 flex flex-col gap-3">
-            {projects.map((project) => (
-              <li key={project.slug}>
-                <ProjectCard project={project} variant="compact" />
+            {posts.map((post) => (
+              <li key={post.slug}>
+                <BlogCard post={post} variant="compact" />
               </li>
             ))}
           </ul>

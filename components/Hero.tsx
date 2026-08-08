@@ -14,12 +14,15 @@ export function Hero({ className }: HeroProps) {
       className={cn("relative isolate", className)}
     >
       <div className="mx-auto flex min-h-[min(88vh,44rem)] max-w-5xl flex-col justify-center px-4 py-20 sm:px-6 sm:py-28">
-        <p className="font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
+        <p className="text-sm font-medium tracking-wide text-accent">
+          Available for new opportunities
+        </p>
+        <p className="mt-4 font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
           {siteConfig.name}
         </p>
         <h1
           id="hero-heading"
-          className="mt-5 max-w-2xl font-display text-4xl font-semibold tracking-tight text-ink sm:text-5xl sm:leading-[1.1]"
+          className="mt-4 max-w-2xl font-display text-4xl font-semibold tracking-tight text-ink sm:text-5xl sm:leading-[1.1]"
         >
           Building products worth looking under the hood of.
         </h1>
@@ -30,7 +33,7 @@ export function Hero({ className }: HeroProps) {
         <div className="mt-10 flex flex-wrap gap-3">
           <Magnetic>
             <Button href="/projects" size="lg">
-              View projects
+              See my work
             </Button>
           </Magnetic>
           <Button href="/contact" variant="secondary" size="lg">
