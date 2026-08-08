@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Space_Grotesk } from "next/font/google";
+import localFont from "next/font/local";
 
 import { CelestialBackgroundLazy } from "@/components/motion/CelestialBackgroundLazy";
 import { CustomCursorLazy } from "@/components/motion/CustomCursorLazy";
@@ -10,17 +10,35 @@ import { siteConfig } from "@/lib/site-config";
 
 import "./globals.css";
 
-const sans = DM_Sans({
-  subsets: ["latin"],
+/**
+ * Self-hosted faces (latin variable files under app/fonts).
+ * Avoids next/font/google network fetches that fail on TLS-intercepting dev networks.
+ */
+const sans = localFont({
+  src: [
+    {
+      path: "./fonts/dm-sans-latin-wght-normal.woff2",
+      weight: "100 1000",
+      style: "normal",
+    },
+  ],
   variable: "--font-sans",
   display: "swap",
+  fallback: ["system-ui", "Segoe UI", "sans-serif"],
 });
 
-/** Headings match Lovable reference pair: Grotesk display + DM Sans body. */
-const display = Space_Grotesk({
-  subsets: ["latin"],
+/** Headings: Space Grotesk + DM Sans body — matches Lovable reference pair. */
+const display = localFont({
+  src: [
+    {
+      path: "./fonts/space-grotesk-latin-wght-normal.woff2",
+      weight: "300 700",
+      style: "normal",
+    },
+  ],
   variable: "--font-display",
   display: "swap",
+  fallback: ["system-ui", "Segoe UI", "sans-serif"],
 });
 
 export const metadata: Metadata = {

@@ -16,8 +16,9 @@ alwaysApply: false
 
 ## Typography
 
-- **Display / headings:** Space Grotesk via `next/font` → CSS var `--font-display` / Tailwind `font-display` (matches Lovable reference).
-- **Body / UI:** DM Sans via `next/font` → CSS var `--font-sans` / Tailwind `font-sans`.
+- **Display / headings:** Space Grotesk self-hosted via `next/font/local` (`app/fonts/`) → CSS var `--font-display` / Tailwind `font-display`.
+- **Body / UI:** DM Sans self-hosted via `next/font/local` (`app/fonts/`) → CSS var `--font-sans` / Tailwind `font-sans`.
+- **Do not use `next/font/google`** — Google Fonts downloads fail on some corporate TLS intercept networks and add a build-time network dependency.
 - Do not reintroduce Fraunces, Inter, Roboto, or generic system stacks as primary type.
 
 ## Tailwind
