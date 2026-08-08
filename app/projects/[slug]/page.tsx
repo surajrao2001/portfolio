@@ -50,7 +50,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
         <span aria-hidden="true"> / </span>
         <span>{frontmatter.title}</span>
       </p>
-      <header className="mt-4 border-b border-ink/10 pb-8">
+      <header className="mt-4 pb-8">
         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
           <h1 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">
             {frontmatter.title}

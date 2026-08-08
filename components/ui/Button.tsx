@@ -5,11 +5,11 @@ import { cn } from "@/lib/cn";
 
 const variants = {
   primary:
-    "bg-accent text-surface hover:opacity-90 focus-visible:outline-accent",
+    "bg-accent text-[rgb(219_203_189)] hover:opacity-90 focus-visible:outline-accent dark:text-[rgb(41_0_1)]",
   secondary:
-    "border border-ink/15 bg-surface-raised/80 text-ink hover:border-ink/30 focus-visible:outline-accent",
+    "border border-ink/20 bg-surface-raised/90 text-ink hover:border-accent/40 hover:bg-surface-raised focus-visible:outline-accent",
   ghost:
-    "text-ink-muted hover:text-ink underline-offset-4 hover:underline focus-visible:outline-accent",
+    "text-ink-muted hover:text-accent underline-offset-4 hover:underline focus-visible:outline-accent",
 } as const;
 
 const sizes = {

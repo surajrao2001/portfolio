@@ -11,7 +11,7 @@ alwaysApply: false
 - `components/` — site personality and layout (Hero, cards, header/footer).
 - `components/ui/` — small domain-independent primitives used across pages (Button, etc.).
 - `components/mdx/` — MDX-only renderers.
-- `components/motion/` — cursor, celestial background, theme toggle, motion utilities.
+- `components/motion/` — reveal, magnetic, page transition, tilt, theme toggle (no custom cursor / celestial).
 - One component per file; file name matches the export (`ProjectCard.tsx` → `ProjectCard`).
 
 ## Typography
@@ -20,6 +20,12 @@ alwaysApply: false
 - **Body / UI:** DM Sans self-hosted via `next/font/local` (`app/fonts/`) → CSS var `--font-sans` / Tailwind `font-sans`.
 - **Do not use `next/font/google`** — Google Fonts downloads fail on some corporate TLS intercept networks and add a build-time network dependency.
 - Do not reintroduce Fraunces, Inter, Roboto, or generic system stacks as primary type.
+
+## Color
+
+- Palette tokens only: `surface`, `surface-raised`, `ink`, `ink-muted`, `accent`, `accent-soft` (warm ColorHunt set).
+- Light theme must stay cream/rust — never pure white (`#fff`) as page background.
+- Prefer soft rings/shadows over hard full-width section rules.
 
 ## Tailwind
 
@@ -37,10 +43,11 @@ alwaysApply: false
 
 ## Motion (Framer Motion)
 
-- Only library: Framer Motion (no GSAP, no extra cursor packages).
-- Gate desktop-only effects with `(pointer: fine)`.
+- Only library: Framer Motion (no GSAP).
+- Gate fine-pointer-only effects with `(pointer: fine)`.
 - Honor `prefers-reduced-motion`: skip or instant-apply transitions.
 - Prefer `transform` and `opacity`; avoid animating layout-triggering properties.
+- Custom cursor is forbidden.
 
 ## Forms
 

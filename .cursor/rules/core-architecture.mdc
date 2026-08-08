@@ -11,11 +11,12 @@ Before any change: re-read this file and the glob-scoped rule that matches the f
 
 - **Stack:** Next.js 14 App Router, TypeScript strict, Tailwind CSS, Framer Motion, next-themes.
 - **Type:** Space Grotesk (headings / `font-display`) + DM Sans (body / `font-sans`) — self-hosted under `app/fonts/`, loaded with `next/font/local` (no Google Fonts fetch).
+- **Palette:** ColorHunt warm set — #290001, #87431D, #C87941, #DBCBBD — via CSS vars in `globals.css`. Light stays cream (not pure white); dark is deep maroon.
 - **Pattern:** Jamstack — static MDX content at build time; **one** dynamic path: `POST /api/contact`.
-- **No:** database, auth, CMS, Docker, AI/LLM, queues, second animation library (no GSAP), external UI package (`@surajrao/my-ui-library` is out of scope — build primitives locally).
+- **No:** database, auth, CMS, Docker, AI/LLM, queues, second animation library (no GSAP), external UI package, celestial moon/star layer, custom cursor.
 - **Layout:** `app/`, `components/`, `components/mdx/`, `components/motion/`, `lib/`, `content/`, `tests/`.
 - **Rendering:** Server Components by default. `"use client"` only for interactivity, motion, theme toggle, or browser APIs.
-- **UI:** Site-owned components only (`Button`, theme provider, cards, Hero, MDX renderers). Keep domain-independent primitives small and local under `components/ui/` when needed.
+- **UI:** Site-owned components only. Primitives under `components/ui/` when needed.
 
 ## Git workflow
 
@@ -35,10 +36,8 @@ Before any change: re-read this file and the glob-scoped rule that matches the f
 
 ## Performance & a11y baseline
 
-- Lazy-mount heavy client UI (`next/dynamic`, `{ ssr: false }` where needed): custom cursor, celestial background.
-- Respect `prefers-reduced-motion` everywhere animation exists.
-- Semantic HTML landmarks; heading hierarchy; labels on form controls.
 - Prefer transform/opacity for animation (compositor-friendly).
+- Do not reintroduce a custom cursor or celestial decorative layer.
 
 ## Orchestration
 
